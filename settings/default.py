@@ -4,7 +4,7 @@ Django settings for sbzwebsite project.
 
 import os
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -41,13 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'apps.util',
-    'apps.general',
-    'apps.multivers',
-    'apps.grolsch',
-    'apps.mail',
+    'apps.util.apps.UtilConfig',
+    'apps.general.apps.GeneralConfig',
+    'apps.multivers.apps.MultiversConfig',
+    'apps.grolsch.apps.GrolschConfig',
+    'apps.mail.apps.MailConfig',
     'apps.flowguard',
-    'apps.hygiene',
+    'apps.hygiene.apps.HygieneConfig',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +62,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'urls'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 TEMPLATES = [
     {

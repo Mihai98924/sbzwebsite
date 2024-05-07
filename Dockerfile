@@ -1,4 +1,4 @@
-FROM python:3.7-slim
+FROM python:3.10-slim
 
 # Install required packages for symposia
 RUN apt-get update && apt-get install -y \
