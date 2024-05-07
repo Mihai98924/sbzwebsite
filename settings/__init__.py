@@ -1,7 +1,7 @@
-from .local import *
+from settings.default import *
 
 # Try to import local settings, fallback to config via environment variables if that fails
 try:
-	from sbzwebsite.settings.local import *
+	from settings.local import *
 except ImportError:
-	from sbzwebsite.settings.environ import *
+	from settings.environ import *

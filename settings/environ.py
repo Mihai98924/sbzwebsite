@@ -12,7 +12,7 @@ from pathlib import Path
 from email.utils import getaddresses
 from django.core.management.utils import get_random_secret_key
 
-from sbzwebsite.settings.default import *
+from settings.default import *
 
 # Initialize an env object for `django-environ`
 env = environ.Env()
