@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-# Install required packages for symposia
+# Install required packages for sbzwebsite
 RUN apt-get update && apt-get install -y \
     default-libmysqlclient-dev \
     libjpeg-dev \
