@@ -115,6 +115,26 @@ LOGGING = {
     },
 }
 
+# Sentry SDK configuration
+DJANGO_SENTRY_DSN = env("DJANGO_SENTRY_DSN", default="")
+DJANGO_SENTRY_ENVIRONMENT = env("DJANGO_SENTRY_ENVIRONMENT", default="production")
+if DJANGO_SENTRY_DSN:
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+    sentry_sdk.init(
+        dsn=DJANGO_SENTRY_DSN,
+        integrations=[
+            DjangoIntegration(),
+        ],
+        # Proportion of requests that are traced for performance monitoring.
+        # Keep at (or very very very close to) 0 in production!
+        traces_sample_rate=0,
+        # Send user details of request to Sentry
+        send_default_pii=True,
+        auto_session_tracking=False,
+        environment=DJANGO_SENTRY_ENVIRONMENT,
+    )
+
 # Django authentication backends
 
 ###
