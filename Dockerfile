@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 # Install required packages for sbzwebsite
 RUN apt-get update && apt-get install -y \
@@ -22,25 +22,27 @@ RUN apt-get install -y git media-types
 # Clean up apt caches
 RUN apt-get clean
 
-# Create directory for Symposia app
+# Create directory for SBZ app
 RUN mkdir -p /app
-
-# Set up a Virtual Environment
-RUN python3 -m venv /app/venv
-
-# Install pip packages
-COPY requirements.txt /app/requirements.txt
-RUN /app/venv/bin/pip install -r /app/requirements.txt
-RUN /app/venv/bin/pip install uwsgi
 
 # Copy over codebase
 COPY . /app
+
+WORKDIR /app
+
+# Set up a Virtual Environment
+RUN python3 -m venv /venv
+
+# Install pip packages
+COPY requirements.txt requirements.txt
+RUN /venv/bin/pip install -r requirements.txt
+RUN /venv/bin/pip install uwsgi
 
 # Create the `uwsgi` user
 RUN useradd -Ms /bin/bash uwsgi
 RUN chown -R uwsgi:uwsgi /app
 USER uwsgi
 
-WORKDIR /app
+
 EXPOSE 8080/tcp
-CMD ["bash", "/app/docker-entrypoint.sh"]
+CMD ["bash", "docker-entrypoint.sh"]

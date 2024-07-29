@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /app/venv/bin/activate
+source /venv/bin/activate
 python3 manage.py migrate
 python3 manage.py collectstatic --noinput
 python3 manage.py compilemessages
@@ -11,7 +11,7 @@ uwsgi \
     --socket 0.0.0.0:8080 \
     --uid uwsgi \
     --plugins python3 \
-    --home /app/venv \
+    --home /venv \
     --protocol http \
     --master \
     --vacuum \
