@@ -25,9 +25,6 @@ DATABASES = {
     'default': env.db_url("DATABASE_URL", default=f"sqlite:////{BASE_DIR}/sbz.db")
 }
 
-# Override database engine to our custom mysql backend, if mysql database is used
-if DATABASES['default'].get('ENGINE', None) == "django.db.backends.mysql":
-    DATABASES['default']['ENGINE'] = 'amelie.tools.utf8mb4_mysql_backend'
 
 # Override database options if environment variable is given (unsupported by django-environ's env.db() function)
 DATABASE_OPTIONS = env.json('DATABASE_OPTIONS', default={})
